@@ -29,7 +29,7 @@ void Solver::generator(uint32_t index, uint32_t &bits, std::string &expression) 
 
     if (index != 7) {
         bits /= 3;
-        generator(index++, bits, expression);
+        generator(index + 1, bits, expression);
     }
 }
 
@@ -37,15 +37,26 @@ int Solver::calculate(const std::string &expression) {
     assert(expression.size() == 17);
     int totalCount = 0;
     int current = 0;
+    char lastExpression = '+';
     for (const char &c: expression) {
         switch (c) {
             case '+':
-                totalCount += current;
+                if (lastExpression == '+') {
+                    totalCount += current;
+                } else {
+                    totalCount -= current;
+                }
                 current = 0;
+                lastExpression = '+';
                 break;
             case '-':
-                totalCount -= current;
+                if (lastExpression == '+') {
+                    totalCount += current;
+                } else {
+                    totalCount -= current;
+                }
                 current = 0;
+                lastExpression = '-';
                 break;
             case ' ':
                 break;
@@ -80,12 +91,27 @@ int Solver::calculate(const std::string &expression) {
                 break;
         }
     }
+    if (lastExpression == '+') {
+        totalCount += current;
+    } else {
+        totalCount -= current;
+    }
 
     return totalCount;
 }
 
 void Solver::print() {
     for (const auto &e: result) {
-        std::cout << e << "\n";
+        for (const auto &c: e) {
+            if (c == '+') {
+                std::cout << " + ";
+            } else if (c == '-') {
+                std::cout << " - ";
+            } else if (c == ' ') {
+            } else {
+                std::cout << c;
+            }
+        }
+        std::cout << std::endl;
     }
 }
