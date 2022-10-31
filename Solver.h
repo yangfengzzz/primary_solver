@@ -9,6 +9,7 @@
 #include <string>
 #include <array>
 
+// todo description
 class Solver {
 public:
     explicit Solver(int total) : total(total) {}
