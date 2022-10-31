@@ -1,3 +1,0 @@
-/Users/yangfeng/Desktop/solver/cmake-build-debug/CMakeFiles/solver.dir
-/Users/yangfeng/Desktop/solver/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/yangfeng/Desktop/solver/cmake-build-debug/CMakeFiles/rebuild_cache.dir
